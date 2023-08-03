@@ -1,6 +1,19 @@
+jwt:
+  secret: ${PROD_JWT_SECRET}
+
 spring:
+  # Templates reloading during development
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    cache: false
+
+  # Static resources reloading during development
+  resources:
+    static-locations: file:src/main/resources/static/
+    cache-period: 0
+
   datasource:
-    url: jdbc:mysql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
+    url: jdbc:mysql://root:N8wFBZvwtSLAZzea8oqq@${PROD_DB_HOST}:${PROD_DB_HOST}/${PROD_DB_NAME}
     username: ${PROD_DB_USERNAME}
     password: ${PROD_DB_PASSWORD}
-    name: pro_fit_app
+    name: railway

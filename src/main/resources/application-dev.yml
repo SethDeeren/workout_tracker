@@ -1,3 +1,9 @@
+server:
+  port: 8081
+
+jwt:
+  secret: "secret123"
+
 spring:
   # Templates reloading during development
   thymeleaf:
@@ -9,6 +15,8 @@ spring:
     static-locations: file:src/main/resources/static/
     cache-period: 0
 
-  spring:
-    profiles:
-      active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/pro_fit_app
+    username: root
+    password: password
+    name: pro_fit_app
