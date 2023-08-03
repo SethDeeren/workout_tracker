@@ -18,7 +18,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -52,14 +54,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
-
+        List<String> allowedOrgins = new ArrayList<>();
+        allowedOrgins.add("http://localhost:3000");
+        allowedOrgins.add("https://workouttracker-production.up.railway.app");
 
         http.cors().configurationSource(new CorsConfigurationSource() {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest httpServletRequest) {
                 CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                config.setAllowedOrigins(allowedOrgins);
                 config.setAllowedMethods(Collections.singletonList("*")); // refers to http methods post, get, etc..
                 config.setAllowCredentials(true); // needed for login, register functionality
                 config.setAllowedHeaders(Collections.singletonList("*")); // all headers must be allowed
