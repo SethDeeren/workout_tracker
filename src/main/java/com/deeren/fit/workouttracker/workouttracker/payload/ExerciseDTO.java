@@ -14,7 +14,7 @@ public class ExerciseDTO {
     private double weight;
     // EnduranceExercise
     private double targetTime;
-    private double targetWeight;
+    private double targetDistance;
     // The type must have
     @NotEmpty
     private String type;

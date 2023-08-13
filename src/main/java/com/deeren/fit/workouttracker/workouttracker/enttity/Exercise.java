@@ -58,8 +58,8 @@ public class Exercise {
 
 
     // Tracker
-
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Orphan removal will lose all exercise trackers even if just updating this tracker
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     private List<ExerciseTracker> exerciseTrackers = new ArrayList<>();
 
 }
