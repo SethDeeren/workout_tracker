@@ -15,12 +15,12 @@ public class FrontEndController implements ErrorController {
 
     @GetMapping(value = "/^\\/([^a][^p][^i]|.{1,2}|.{4,})\\/.*$/")
     public String getReactApp(){
-        return "index";
+        return "forward:/";
     }
 
     @RequestMapping("/error")
     public String handleError() {
         //do something like logging
-        return "index";
+        return "forward:/";
     }
 }

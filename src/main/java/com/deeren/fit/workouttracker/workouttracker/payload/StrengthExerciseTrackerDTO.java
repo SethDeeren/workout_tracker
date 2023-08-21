@@ -20,8 +20,8 @@ public class StrengthExerciseTrackerDTO extends ExerciseTrackerDTO{
         this.reps = reps;
     }
 
-    public StrengthExerciseTrackerDTO(double weight, int reps, LocalDateTime trackerDateAndTime) {
-        super(trackerDateAndTime);
+    public StrengthExerciseTrackerDTO(long id, double weight, int reps, LocalDateTime trackerDateAndTime) {
+        super(id, trackerDateAndTime);
         this.weight = weight;
         this.reps = reps;
     }

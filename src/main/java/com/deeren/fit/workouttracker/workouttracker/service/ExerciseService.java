@@ -50,9 +50,9 @@ public class ExerciseService {
         return exercise.getExerciseTrackers().stream()
                 .map(tracker -> {
                     if (exercise.getType().equals("strength")) {
-                        return new StrengthExerciseTrackerDTO(tracker.getWeight(), tracker.getReps(), tracker.getTrackerDateAndTime());
+                        return new StrengthExerciseTrackerDTO(tracker.getId(), tracker.getWeight(), tracker.getReps(), tracker.getTrackerDateAndTime());
                     } else {
-                        return new EnduranceExerciseTrackerDTO(tracker.getTime(), tracker.getDistance(), tracker.getTrackerDateAndTime());
+                        return new EnduranceExerciseTrackerDTO(tracker.getId(), tracker.getTime(), tracker.getDistance(), tracker.getTrackerDateAndTime());
                     }
                 })
                 .collect(Collectors.toList());

@@ -17,8 +17,8 @@ public class EnduranceExerciseTrackerDTO extends ExerciseTrackerDTO{
         this.distance = distance;
     }
 
-    public EnduranceExerciseTrackerDTO(double time, double distance, LocalDateTime trackerDateAndTime) {
-        super(trackerDateAndTime);
+    public EnduranceExerciseTrackerDTO(long id, double time, double distance, LocalDateTime trackerDateAndTime) {
+        super(id, trackerDateAndTime);
         this.time = time;
         this.distance = distance;
     }

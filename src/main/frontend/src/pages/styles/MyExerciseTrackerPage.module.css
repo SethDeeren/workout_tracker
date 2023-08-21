@@ -1,0 +1,128 @@
+.exerciseTrackerPage{
+    height: 100%;
+}
+
+.myExerciseTrackerNav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 0 0;
+    background-color: #f1f0f0;
+    margin-bottom: 1rem;
+}
+
+.exerciseTrackerPageLink {
+    margin: 0 1rem;
+	color: var(--dark-blue);
+	text-decoration: none;
+}
+
+.active{
+	border-bottom: solid 0.25rem;
+}
+
+.currnetTracker {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.currentTrackerCompletedTitle {
+    width: 90%;
+    padding: 0.25rem 0;
+    font-size: 1.25rem;
+    border-bottom: solid rgb(226, 226, 226) 1.5px;
+    margin-top: 25%;
+}
+
+.currentTrackerCompletedItem {
+    font-size: 1.25rem;
+    margin: 0.25rem 0;
+}
+
+.currentTrackerDeleteItemButton {
+    color: red;
+    background: none;
+    border: none;
+}
+
+.addTrackerForm {
+    height: 15%;
+    /* border: solid black 1px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.addTrackerInputGroupTitle {
+    width: 90%;
+    padding: 0.25rem 0;
+    font-size: 1.25rem;
+    border-bottom: solid rgb(226, 226, 226) 1.5px;
+    margin-top: 10%;
+}
+
+.addTrackerInputGroup {
+    /* border: solid black 1px; */
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    width: 90%;   
+}
+
+
+.addTrackerInputGroup > input {
+    width: 20%;
+    height: 3rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 2rem;
+}
+
+.addTrackerInputGroup > input:focus
+{
+    background-color: var(--light-blue);
+    border-color: var(--light-blue);
+    color: var(--dark-blue);
+    
+}
+
+.addTrackerInputGroup > input:focus {
+    outline: none;
+    border: var(--dark-blue) 2px solid;
+}
+
+.addTrackerFormSubmittButton {
+    background: none;
+    border: none;
+    border-radius: 50px;
+    padding: 0 1rem 0 1rem;
+    margin: 0 0 0 0;
+    height: 100%;
+    font-size: 3rem;
+    font-weight: 100;
+}
+
+.historyTrackerList {
+    width: 80%;
+    margin: auto;
+}
+
+.historyTrackerHeaderDate {
+    font-weight: bold;
+    margin: 2rem 0 0.5rem 0;
+}
+
+@media (min-width: 40rem) {
+    .exerciseTrackerPage{
+        height: 100%;
+        margin: auto;
+        width: 40rem;
+        border-left: solid #ccc 1px;
+        border-right: solid #ccc 1px;
+    }
+}

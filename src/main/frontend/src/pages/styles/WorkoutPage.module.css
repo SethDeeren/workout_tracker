@@ -1,0 +1,36 @@
+.container {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.workout-header {
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.workout-title {
+    padding: 0.5rem 0;
+}
+
+.workout-credits {
+    font-size: 0.9rem;
+}
+
+.workout-description {
+    white-space: pre-wrap;
+}
+
+.exercises {
+    margin: 1rem 0;
+}
+
+
+
+@media (min-width: 40rem) {
+    .container {
+        margin: auto;
+        width: 40rem;
+    }
+}

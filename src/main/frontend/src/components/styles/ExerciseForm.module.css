@@ -1,0 +1,88 @@
+.main-info {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.type-info {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 12em;
+    height: 2.5em;
+    
+}
+
+.name:focus-visible,
+.input-item:focus-visible {
+    outline-color: var(--dark-blue)
+}
+
+.input-item {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 8em;
+    height: 2.5em;
+    
+}
+
+.main-info-label {
+    font: inherit;
+    padding: 0.5rem;
+    width: 8em;
+    height: 2.5em;
+    
+}
+
+.deleteSection {
+    color: red;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.deleteSectionTitle {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.deleteSectionSubtitle{
+    color: red;
+    padding: 0.5rem 0;
+}
+
+.deleteSectionButton {
+    align-self: start; 
+    color: red;
+    background: none; 
+    border-color: red;
+}
+
+
+@media (min-width: 40rem) {
+    .main-info {
+        display:flex;
+        flex-direction: row;
+        justify-content: left;
+        margin-bottom: 10px;
+    }
+    
+    .type-info {
+        display:flex;
+        flex-direction: row;
+        justify-content:left;
+        margin-right:10px;
+    }
+}

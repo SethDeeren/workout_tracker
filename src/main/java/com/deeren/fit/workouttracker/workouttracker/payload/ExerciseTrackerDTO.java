@@ -10,8 +10,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -22,5 +22,7 @@ import java.time.LocalDateTime;
 })
 public abstract class ExerciseTrackerDTO {
     //LocalDateTime getTrackerDateAndTime();
+    long id;
     LocalDateTime trackerDateAndTime;
+
 }
