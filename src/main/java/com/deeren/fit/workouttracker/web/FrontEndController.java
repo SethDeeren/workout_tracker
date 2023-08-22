@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FrontEndController implements ErrorController {
 
-//    @GetMapping("/")
-//    public String getFrontEnd() {
-//        return "index";
-//    }
 
     @GetMapping(value = "/^\\/([^a][^p][^i]|.{1,2}|.{4,})\\/.*$/")
     public String getReactApp(){
