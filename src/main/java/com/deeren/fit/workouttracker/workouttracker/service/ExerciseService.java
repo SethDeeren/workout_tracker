@@ -2,8 +2,11 @@ package com.deeren.fit.workouttracker.workouttracker.service;
 
 import com.deeren.fit.workouttracker.common.exception.ResourceNotFoundException;
 import com.deeren.fit.workouttracker.workouttracker.enttity.Exercise;
+import com.deeren.fit.workouttracker.workouttracker.enttity.Workout;
 import com.deeren.fit.workouttracker.workouttracker.payload.*;
 import com.deeren.fit.workouttracker.workouttracker.repository.ExerciseRepository;
+import com.deeren.fit.workouttracker.workouttracker.repository.WorkoutRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,10 +19,28 @@ import java.util.stream.Collectors;
 public class ExerciseService {
 
     ExerciseRepository exerciseRepository;
+    WorkoutRepository workoutRepository;
 
-    public ExerciseService(ExerciseRepository exerciseRepository) {
+    ModelMapper mapper;
+
+    public ExerciseService(ExerciseRepository exerciseRepository,WorkoutRepository workoutRepository, ModelMapper mapper) {
         this.exerciseRepository = exerciseRepository;
+        this.workoutRepository = workoutRepository;
+        this.mapper = mapper;
     }
+
+    public ExerciseDTO createExercise(ExerciseDTO exerciseDTO, long workoutId) {
+        Workout workout = workoutRepository.findById(workoutId)
+                .orElseThrow(() -> new ResourceNotFoundException("Workout", "Id", workoutId));
+
+        Exercise exercise = mapToEntity(exerciseDTO);
+        exercise.setWorkout(workout);
+        workout.addExercise(exercise);
+        Exercise savedExercise = exerciseRepository.save(exercise);
+        return mapToDTO(savedExercise);
+    }
+
+
 
     public Exercise findExerciseById(long id) {
         return exerciseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Exercise", "Id", id));
@@ -29,6 +50,20 @@ public class ExerciseService {
         Exercise exercise = exerciseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Exercise", "Id", id));
         return mapToTrackingDTO(exercise);
     }
+
+    public void deleteExercise(long id) {
+        exerciseRepository.deleteById(id);
+    }
+
+
+    private ExerciseDTO mapToDTO(Exercise exercise) {
+        return mapper.map(exercise, ExerciseDTO.class);
+    }
+
+    private Exercise mapToEntity(ExerciseDTO exerciseDTO) {
+        return mapper.map(exerciseDTO, Exercise.class);
+    }
+
 
     private ExerciseTrackingResponseDTO mapToTrackingDTO(Exercise exercise) {
         ExerciseTrackingResponseDTO trackingDTO = new ExerciseTrackingResponseDTO();
@@ -57,4 +92,5 @@ public class ExerciseService {
                 })
                 .collect(Collectors.toList());
     }
+
 }

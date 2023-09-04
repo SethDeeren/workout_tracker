@@ -9,6 +9,10 @@ class EnduranceExercise extends Exercise {
         this.time = targetTime;
         this.distance = targetDistance;
     }
+
+    getJSONObject(): {} {
+        return {id:this.id, name:this.name,type: this.type, time: this.time, distance: this.distance };
+    }
 }
 
 export default EnduranceExercise;

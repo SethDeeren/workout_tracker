@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
-import useInput from "../hooks/use-input";
+import React, {useState, useRef, useEffect, useContext} from "react";
+import {AuthContext} from "../store/auth-context";
 import Exercise from "../models/exercise";
 import StrengthExercise from "../models/strengthExercise";
 import EnduranceExercise from "../models/enduranceExercise";
 import Select from "./UI/Select";
 import Modal from "./UI/Modal";
 import styles from "./styles/ExerciseForm.module.css";
+import {API} from "../config";
 
 const ExcersiseForm: React.FC<{
   addExercise: (exercise: Exercise) => void;
+  deleteExercise: (ex: Exercise) => void;
   onClose: () => void;
   exercise: Exercise | null;
 }> = (props) => {
@@ -18,6 +20,7 @@ const ExcersiseForm: React.FC<{
     { label: "Endurance", value: "endurance" },
   ];
 
+  const authCtx = useContext(AuthContext);
   const [exercise, setExercise] = useState<Exercise | null>(props.exercise);
 
   useEffect(() => {
@@ -207,8 +210,27 @@ const ExcersiseForm: React.FC<{
     e.preventDefault();
     if(exercise) {
       if(window.confirm("All trackers for this exercise will be lost. Are you sure you want to delete this exercise?")){
-        setExercise(null);
-        clearForm();
+        if (exercise.id) {
+          fetch(`${API}/exercises/${exercise.id}`, {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authCtx.token}`,
+            }
+          }).then((res) => {
+            console.log("success!");
+            props.deleteExercise(exercise);
+            setExercise(null);
+            clearForm();
+            props.onClose();
+          });
+        } else {
+          props.deleteExercise(exercise);
+          setExercise(null);
+          clearForm();
+          props.onClose();
+        }
       }
     }
   }

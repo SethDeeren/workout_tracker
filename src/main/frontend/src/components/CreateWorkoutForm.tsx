@@ -78,11 +78,14 @@ const CreateWorkoutForm: React.FC = () => {
     ));
   };
 
+  const deleteExerciseProp = (ex: Exercise) => {/* place holder prop*/};
+
   return (
     <main>
       {showExerciseModal && (
         <ExcersiseForm
           addExercise={addExercisHandler}
+          deleteExercise={deleteExerciseProp}
           onClose={handeExerciseFormClose}
           exercise={null} // only used for edit not create
         />

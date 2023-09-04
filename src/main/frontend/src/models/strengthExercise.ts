@@ -10,6 +10,10 @@ class StrengthExercise extends Exercise {
         this.reps = reps;
     }
 
+    getJSONObject(): {} {
+        return {id:this.id, name:this.name,type: this.type, sets: this.sets, reps: this.reps};
+    }
+
 }
 
 export default StrengthExercise;

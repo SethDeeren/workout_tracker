@@ -29,12 +29,12 @@ const MyWorkoutEditPage = () => {
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
   const [showExerciseModal, setShowExerciseModal] = useState(false);
   const [exercise, setExercise] = useState<Exercise | null>(null);
-  const [exercises, setExercises] = useState<Exercise[]>([]);
+  //const [exercises, setExercises] = useState<Exercise[]>([]);
 
   useEffect(() => {
     const mapWorkout = (workoutParam: Workout) => {
       setWorkout(workoutParam);
-      setExercises(workoutParam.exercises);
+      //setExercises(workoutParam.exercises);
     };
     fetchWorkout(
       {
@@ -64,7 +64,8 @@ const MyWorkoutEditPage = () => {
         id: workout.id,
         title: enteredTitle,
         description: enteredDescription,
-        exercises: exercises,
+        //exercises: exercises,
+        exercises: workout.exercises
       }),
     }).then((res) => {
       console.log("success!");
@@ -95,11 +96,23 @@ const MyWorkoutEditPage = () => {
 
   
   const addExercisHandler = (ex: Exercise) => {
-    let updatedExercises = exercises.filter(
+    let updatedExercises = workout.exercises.filter(
       (x) => x.id === null || x.id !== ex.id
     );
+    if(ex.id === null) {
+      fetch(`${API}/workouts/${workout.id}/exercises`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authCtx.token}`,
+        },
+        body: JSON.stringify(ex.getJSONObject())
+      })
+    }
     updatedExercises.push(ex);
-    setExercises(updatedExercises);
+    //setExercises(updatedExercises);
+
     setWorkout(
       (prev: Workout) =>
         new Workout(
@@ -113,13 +126,29 @@ const MyWorkoutEditPage = () => {
     console.log("Workout: ", workout);
   };
 
+  const deleteExerciseHandler = (exercise: Exercise) => {
+    //let updatedExercises = workout.exercises.filter((ex) => ex.key !== exercise.key);
+    //setExercises(updatedExercises);
+    setWorkout(
+        (prev: Workout) =>
+            new Workout(
+                prev.title,
+                prev.description,
+                prev.auther,
+                prev.id,
+                prev.exercises.filter((ex) => ex.id !== exercise.id && ex.name != exercise.name)
+            )
+    );
+  }
+
   const openExeciseEdit = (ex: Exercise) => {
     setExercise(ex);
     setShowExerciseModal(true);
   };
-  const handelExerciseFormClose = () => {
+  function handelExerciseFormClose() {
+    setExercise(null);
     setShowExerciseModal(false);
-  };
+  }
   const showExerciseForm = (e: React.FormEvent) => {
     e.preventDefault();
     setShowExerciseModal((prev) => !prev);
@@ -136,6 +165,7 @@ const MyWorkoutEditPage = () => {
       {showExerciseModal && (
         <ExcersiseForm
           addExercise={addExercisHandler}
+          deleteExercise={deleteExerciseHandler}
           onClose={handelExerciseFormClose}
           exercise={exercise}
         />

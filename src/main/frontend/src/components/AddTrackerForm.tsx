@@ -30,7 +30,7 @@ const AddTrackerForm: React.FC = () => {
   const params = useParams();
   const exerciseId = params.exerciseId;
 
-  const onSubmitHandler = (event: React.FormEvent) => {
+  const onSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     const enteredWeight = weightRef.current?.value;
     const enteredReps = repsRef.current?.value;
@@ -41,7 +41,7 @@ const AddTrackerForm: React.FC = () => {
     trackerData.trackerData.exerciseType === "strength"
         ? { type: "strength", weight: enteredWeight, reps: enteredReps }
         : { type: "endurance", time: enteredTime, distance: enteredDistance };
-    fetch(`${API}/exercises/${exerciseId}/trackers`, {
+    const response = await fetch(`${API}/exercises/${exerciseId}/trackers`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -49,12 +49,15 @@ const AddTrackerForm: React.FC = () => {
         Authorization: `Bearer ${authCtx.token}`,
       },
       body: JSON.stringify(requestBody),
-    }).then((res) => {
+    });
+
+
+      const newExerciseTracker: ExerciseTracker = await response.json();
       console.log("success!");
 
-      trackerData.addTracker(tracker);
+      trackerData.addTracker(newExerciseTracker);
       clearForm();
-    });
+
   };
 
   const clearForm = () => {
@@ -92,7 +95,7 @@ const AddTrackerForm: React.FC = () => {
   const timeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTracker(
       (prev) =>
-        new StrengthExerciseTracker(
+        new EnduranceExerciseTracker(
             null,
           Number(e.target.value),
           (prev as EnduranceExerciseTracker).distance,
@@ -103,7 +106,7 @@ const AddTrackerForm: React.FC = () => {
   const distanceInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTracker(
       (prev) =>
-        new StrengthExerciseTracker(
+        new EnduranceExerciseTracker(
             null,
           (prev as EnduranceExerciseTracker).time,
           Number(e.target.value),
