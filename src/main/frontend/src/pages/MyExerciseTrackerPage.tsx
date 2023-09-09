@@ -17,6 +17,7 @@ type TrackerData = {
   exerciseType: string;
   currentTrackers: Array<ExerciseTracker>;
   historyTrackers: Array<ExerciseTracker>;
+  progressTrackers: Array<ExerciseTracker>;
 };
 
 const MyExerciseTrackerPage = () => {
@@ -29,6 +30,7 @@ const MyExerciseTrackerPage = () => {
     exerciseType: "",
     currentTrackers: [],
     historyTrackers: [],
+    progressTrackers: [],
   });
 
   const addTracker = (tracker: ExerciseTracker) => {
@@ -51,7 +53,8 @@ const MyExerciseTrackerPage = () => {
       setTrackerData((prev) => ({
         ...prev,
         currentTrackers: [...prev.currentTrackers.filter(tr => tr.id !== trackerId)],
-        historyTrackers: [...prev.historyTrackers.filter(tr => tr.id !== trackerId)]
+        historyTrackers: [...prev.historyTrackers.filter(tr => tr.id !== trackerId)],
+        progressTrackers: [...prev.historyTrackers.filter(tr => tr.id !== trackerId)]
       }));
     });
   }
@@ -98,6 +101,7 @@ const MyExerciseTrackerPage = () => {
 
     const mapTrackers = (dataParam: TrackerData) => {
       dataParam.historyTrackers.forEach(t => t.trackerDateAndTime = new Date(t.trackerDateAndTime!.toString()));
+      dataParam.progressTrackers.forEach(t => t.trackerDateAndTime = new Date(t.trackerDateAndTime!.toString()));
       dataParam.historyTrackers.forEach(t => t.trackerDateAndTime = new Date(t.trackerDateAndTime!.toString()));
       setTrackerData((prevDataTracker) => ({
         ...prevDataTracker,
@@ -105,6 +109,7 @@ const MyExerciseTrackerPage = () => {
         exerciseType: dataParam.exerciseType,
         currentTrackers: dataParam.currentTrackers,
         historyTrackers: dataParam.historyTrackers,
+        progressTrackers: dataParam.progressTrackers,
       }));
       console.log(dataParam);
     };

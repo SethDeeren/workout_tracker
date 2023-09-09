@@ -75,6 +75,7 @@ public class ExerciseService {
                     .filter(tracker -> LocalDate.now().equals(tracker.getTrackerDateAndTime().toLocalDate()))
                     .collect(Collectors.toList())
         );
+        trackingDTO.setProgressTrackers(getExerciseTrackerDTOs(exercise));
         trackingDTO.setHistoryTrackers(getExerciseTrackerDTOs(exercise));
         Collections.sort(trackingDTO.getHistoryTrackers(), new TrackerSorter());
         trackingDTO.getHistoryTrackers().stream().forEach(tracker -> tracker.setTrackerDateAndTime(tracker.getTrackerDateAndTime().withHour(0).withMinute(0).withSecond(0).withNano(0)));

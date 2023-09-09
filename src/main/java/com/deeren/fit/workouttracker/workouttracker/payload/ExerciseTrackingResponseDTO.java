@@ -13,7 +13,6 @@ public class ExerciseTrackingResponseDTO {
     String exerciseType;
     List<ExerciseTrackerDTO> currentTrackers;
     List<ExerciseTrackerDTO> historyTrackers;
-
-
+    List<ExerciseTrackerDTO> progressTrackers;
 
 }

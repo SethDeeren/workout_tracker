@@ -6,6 +6,7 @@ type TrackerData = {
     exerciseType: string;
     currentTrackers: Array<ExerciseTracker>;
     historyTrackers: Array<ExerciseTracker>;
+    progressTrackers: Array<ExerciseTracker>;
 };
 
 type TrackerDataObj = {
