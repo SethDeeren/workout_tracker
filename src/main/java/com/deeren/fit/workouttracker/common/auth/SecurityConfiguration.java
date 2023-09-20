@@ -56,6 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         List<String> allowedOrgins = new ArrayList<>();
         allowedOrgins.add("http://localhost:3000");
+        allowedOrgins.add("http://localhost:8081");
         allowedOrgins.add("https://workouttracker-production.up.railway.app");
 
         http.cors().configurationSource(new CorsConfigurationSource() {

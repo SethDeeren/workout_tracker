@@ -9,6 +9,10 @@ class EnduranceExerciseTracker extends ExerciseTracker{
         this.time = time;
         this.distance = distance;
     }
+
+    getJSONObject(): {} {
+        return {...super.getJSONObject(), time: this.time, distance: this.distance};
+    }
 }
 
 export default EnduranceExerciseTracker;

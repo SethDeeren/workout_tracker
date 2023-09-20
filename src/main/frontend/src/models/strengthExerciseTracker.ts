@@ -10,6 +10,10 @@ class StrengthExerciseTracker extends ExerciseTracker{
         this.reps = reps;
     }
 
+    getJSONObject(): {} {
+        return {...super.getJSONObject(), weight: this.weight, reps: this.reps};
+    }
+
 }
 
 export default StrengthExerciseTracker;

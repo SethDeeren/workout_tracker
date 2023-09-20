@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -47,6 +48,9 @@ public class ExerciseTrackerService {
             )
         ){
             throw new FitClubAPIException(HttpStatus.BAD_REQUEST, "Miss matched tracker type to exercise");
+        }
+        if(trackerDTO.getTrackerDateAndTime() == null) {
+            trackerDTO.setTrackerDateAndTime(LocalDateTime.now());
         }
         ExerciseTracker newExerciseTracker = mapToEntity(trackerDTO);
         newExerciseTracker.setExercise(exercise);

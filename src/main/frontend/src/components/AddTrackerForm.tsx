@@ -11,7 +11,7 @@ import {API} from "../config";
 
 import styles from "../pages/styles/MyExerciseTrackerPage.module.css";
 
-const AddTrackerForm: React.FC = () => {
+const AddTrackerForm: React.FC<{trackerDate?: Date}> = (props) => {
 
   const trackerData = useTrackerData();
 
@@ -39,8 +39,8 @@ const AddTrackerForm: React.FC = () => {
 
     const requestBody =
     trackerData.trackerData.exerciseType === "strength"
-        ? { type: "strength", weight: enteredWeight, reps: enteredReps }
-        : { type: "endurance", time: enteredTime, distance: enteredDistance };
+        ? { type: "strength", weight: enteredWeight, reps: enteredReps, trackerDateAndTime: props.trackerDate }
+        : { type: "endurance", time: enteredTime, distance: enteredDistance, trackerDateAndTime: props.trackerDate };
     const response = await fetch(`${API}/exercises/${exerciseId}/trackers`, {
       method: "POST",
       headers: {
@@ -53,10 +53,13 @@ const AddTrackerForm: React.FC = () => {
 
 
       const newExerciseTracker: ExerciseTracker = await response.json();
+      newExerciseTracker.trackerDateAndTime = new Date(newExerciseTracker.trackerDateAndTime!.toString())
       console.log("success!");
+     //if(!props.trackerDate) {
+       trackerData.addTracker(newExerciseTracker);
 
-      trackerData.addTracker(newExerciseTracker);
-      clearForm();
+     //}
+     clearForm();
 
   };
 

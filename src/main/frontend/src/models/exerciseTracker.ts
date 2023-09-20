@@ -8,6 +8,10 @@ class ExerciseTracker {
         this.type = type;
         this.trackerDateAndTime = trackerDateAndTime;
     }
+
+    getJSONObject(): {} {
+        return {id: this.id, type: this.type, trackerDateAndTime: this.trackerDateAndTime};
+    }
     
 }
 

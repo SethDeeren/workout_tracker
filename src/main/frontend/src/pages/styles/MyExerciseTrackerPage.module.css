@@ -115,6 +115,11 @@
 .historyTrackerHeaderDate {
     font-weight: bold;
     margin: 2rem 0 0.5rem 0;
+    /*border: 1px solid black;*/
+    /*background-color: var(--light-blue);*/
+    /*width: fit-content;*/
+    /*padding: 0.5rem;*/
+    /*border-radius: 5px;*/
 }
 
 @media (min-width: 40rem) {

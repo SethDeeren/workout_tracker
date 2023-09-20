@@ -4,6 +4,7 @@ package com.deeren.fit.workouttracker.workouttracker.enttity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -34,8 +35,9 @@ public class ExerciseTracker {
     @Column(name = "extrk_time")
     private double time;
 
-    @CreationTimestamp
+    //@CreationTimestamp
     @Column(name = "extrk_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") //'T'HH:mm
     private LocalDateTime trackerDateAndTime;
 
 //    @Column(name="gu_id")

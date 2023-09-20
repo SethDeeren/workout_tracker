@@ -7,6 +7,7 @@ import HistoryExerciseTrackers from "../components/HistoryExerciseTrackers";
 import ExerciseProgressTracker from "../components/ExerciseProgressTracker";
 import styles from "./styles/MyExerciseTrackerPage.module.css";
 import ExerciseTracker from "../models/exerciseTracker";
+import {isToday} from "../utility/dateHelper";
 import {API} from "../config";
 
 import { TrackerDataContext } from "../store/exercise-tracker-contex";
@@ -34,9 +35,27 @@ const MyExerciseTrackerPage = () => {
   });
 
   const addTracker = (tracker: ExerciseTracker) => {
+   if((tracker.trackerDateAndTime !== null) && (isToday(tracker.trackerDateAndTime))) {
+      setTrackerData((prev) => ({
+        ...prev,
+        currentTrackers: [...prev.currentTrackers, tracker],
+      }));
+   } else {
+     const newHistoryTrackers = [...trackerData.historyTrackers, tracker];
+     // @ts-ignore
+     newHistoryTrackers.sort((t, t2) => (t!.trackerDateAndTime - t2!.trackerDateAndTime));
+
+      setTrackerData((prev) => ({
+        ...prev,
+        historyTrackers: [...newHistoryTrackers],
+     }));
+   }
+  };
+
+  const addHistoryTracker = (tracker: ExerciseTracker) => {
     setTrackerData((prev) => ({
       ...prev,
-      currentTrackers: [...prev.currentTrackers, tracker],
+      historyTrackers: [...prev.historyTrackers, tracker],
     }));
   };
 
