@@ -135,7 +135,7 @@ const AddTrackerForm: React.FC<{trackerDate?: Date}> = (props) => {
             />
             <label htmlFor="">Weight</label>
             <input
-              onChange={repInputChange} type="number"
+              onChange={repInputChange} type="number" step="any"
               ref={repsRef}
               required
             />
