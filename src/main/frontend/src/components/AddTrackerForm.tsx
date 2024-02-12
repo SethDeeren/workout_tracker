@@ -129,7 +129,7 @@ const AddTrackerForm: React.FC<{trackerDate?: Date}> = (props) => {
           <div className={styles.addTrackerInputGroup}>
             <input
               onChange={weightInputChange}
-              type="number"
+              type="number" step="any"
               ref={weightRef}
               required
             />
